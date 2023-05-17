@@ -1,0 +1,13 @@
+p {
+    color: black;
+}
+
+.PostTimelineCard {
+    display: block;
+    justify-content: center;
+    border: 1px solid black;
+    margin: auto;
+    margin-bottom: 15px;
+    padding: 15px;
+    max-width: 800px;
+}

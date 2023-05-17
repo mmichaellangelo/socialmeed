@@ -13,9 +13,9 @@ export default function Header(props:HeaderProps) {
             <p id="site_tagline">{props.site_tagline}</p>
             {
                 props.logged_in ?
-                    <p>logged in</p>
+                    <p id="is_logged_in">logged in</p>
                 :   
-                    <p>logged out</p>
+                    <p id="is_logged_in">logged out</p>
             }
         </div>
     )
