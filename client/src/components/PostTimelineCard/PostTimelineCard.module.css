@@ -1,0 +1,40 @@
+.PostTimelineCard {
+    background-color: #2E4057;
+    border-radius: 5px;
+    border: 2px solid #048BA8;
+    padding: 1rem;
+    color: white;
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.post_header_container {
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+}
+
+.post_author_info_container {
+    margin: 0px;
+    padding: 0px;
+}
+
+.profile_picture {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    margin-right: 1rem;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    display: inline;
+  }
+
+.post_author {
+    margin: 0px;
+}
+
+.post_date_time {
+    margin: 0px;
+}

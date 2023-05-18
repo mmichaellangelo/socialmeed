@@ -1,4 +1,4 @@
-import './Header.css'
+import classes from './Header.module.css'
 
 interface HeaderProps {
     site_title: string,
@@ -8,15 +8,16 @@ interface HeaderProps {
 
 export default function Header(props:HeaderProps) {
     return (
-        <div id="Header">
-            <h1 id="site_title">{props.site_title}</h1>
-            <p id="site_tagline">{props.site_tagline}</p>
-            {
-                props.logged_in ?
-                    <p id="is_logged_in">logged in</p>
-                :   
-                    <p id="is_logged_in">logged out</p>
-            }
+        <div className={classes.Header}>
+            <h1 className={classes.site_title}>{props.site_title}</h1>
+            <div className={classes.header_user_info_area}>
+                {
+                    props.logged_in ?
+                        <p className={classes.is_logged_in}>logged in as</p>
+                    :   
+                        <p className={classes.is_logged_in}>logged out</p>
+                }
+            </div>
         </div>
     )
 }

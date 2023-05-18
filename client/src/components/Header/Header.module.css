@@ -1,0 +1,21 @@
+.Header {
+    background-color: #2E4057;
+    margin: 0px;
+    padding: 2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.site_title {
+    color: white;
+    margin: 0px;
+}
+
+.is_logged_in {
+    color: white;
+}
+
+.header_user_info_area {
+    margin-left: auto;
+}

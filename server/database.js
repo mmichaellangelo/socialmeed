@@ -11,7 +11,7 @@ const pool = mysql.createPool({
     database: process.env.MYSQL_DATABASE
 }).promise()
 
-export async function getUser(userId:number) {
+export async function getUser(userId) {
     const [rows] = await pool.query(`
         SELECT * 
         FROM users
@@ -19,7 +19,7 @@ export async function getUser(userId:number) {
     return rows[0]
 }
 
-export async function createUser(user:user) {
+export async function createUser(user) {
     const [result] = await pool.query(`
         INSERT INTO users (id, username, name)
         VALUES (?, ?)
@@ -27,7 +27,7 @@ export async function createUser(user:user) {
     return result
 }
 
-export async function getPost(id:string) {
+export async function getPost(id) {
     const [rows] = await pool.query(`
         SELECT *
         FROM posts

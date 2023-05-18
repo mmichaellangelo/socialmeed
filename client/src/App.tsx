@@ -16,10 +16,25 @@ interface post {
     post_body: string
 }
 
+interface user {
+  username: string,
+  first_name: string,
+  last_name: string,
+  age: number,
+}
+
+const mike:user = {
+  username: "mike69420",
+  first_name: "Mike",
+  last_name: "Sultzen",
+  age: 37
+}
+
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
   const [posts, setPosts] = useState<null | post[]>(null)
+  const [userInfo, setUserInfo] = useState<null | user>(mike)
 
   if (posts == null) {
     setPosts(getPosts());
