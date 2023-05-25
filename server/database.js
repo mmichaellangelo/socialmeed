@@ -1,4 +1,4 @@
-import { user } from './INTERFACES'
+
 
 import mysql from 'mysql2'
 import dotenv from 'dotenv'
