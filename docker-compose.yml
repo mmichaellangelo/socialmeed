@@ -45,20 +45,6 @@ services:
     ports:
       - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
 
-  # auth:
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - db
-  #     - db-server
-  #   build: ./auth
-  #   environment:
-  #     - AUTH_DOCKER_PORT=${AUTH_DOCKER_PORT}
-  #     - AUTH_LOCAL_PORT=${AUTH_LOCAL_PORT}
-  #   volumes:
-  #     - ./auth:/auth
-  #     - /auth/node_modules
-  #   ports:
-  #     - ${AUTH_LOCAL_PORT}:${AUTH_DOCKER_PORT}
 
 volumes:
   mysqldb-volume:

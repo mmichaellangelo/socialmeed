@@ -1,0 +1,26 @@
+.LogInBox {
+    display: flex;
+}
+
+.login_box_container {
+    display: block;
+    margin: auto;
+}
+
+.username_input_label, .password_input_label {
+    display:block;
+    margin-bottom: 1rem;
+
+}
+
+.username_input_box, .password_input_box {
+    display:block;
+    margin-bottom: 1rem;
+    
+}
+
+.login_button {
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+}
