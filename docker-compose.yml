@@ -1,15 +1,18 @@
 version: '3.8'
 
 services:
-
   react-app:
     restart: unless-stopped
     build: ./client
+    environment:
+      - REACT_DOCKER_PORT=${REACT_DOCKER_PORT}
+      - REACT_LOCAL_PORT=${REACT_LOCAL_PORT}
     volumes:
       - ./client:/app
       - /app/node_modules
     ports:
-      - 5173:5173
+      - ${REACT_LOCAL_PORT}:${REACT_DOCKER_PORT}
+
   db:
     image: mysql:8.0.33
     container_name: mysql_database
@@ -23,9 +26,17 @@ services:
       - mysqldb-volume:/var/lib/mysql
     ports:
       - 3306:3306
+
   db-server:
     restart: unless-stopped
     build: ./server
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - NODE_LOCAL_PORT=${NODE_LOCAL_PORT}
+      - NODE_DOCKER_PORT=${NODE_DOCKER_PORT}
     volumes:
       - ./server:/opt/db/server
       - /opt/db/server/node_modules
@@ -33,6 +44,21 @@ services:
       - db
     ports:
       - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
+
+  # auth:
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - db
+  #     - db-server
+  #   build: ./auth
+  #   environment:
+  #     - AUTH_DOCKER_PORT=${AUTH_DOCKER_PORT}
+  #     - AUTH_LOCAL_PORT=${AUTH_LOCAL_PORT}
+  #   volumes:
+  #     - ./auth:/auth
+  #     - /auth/node_modules
+  #   ports:
+  #     - ${AUTH_LOCAL_PORT}:${AUTH_DOCKER_PORT}
 
 volumes:
   mysqldb-volume:
