@@ -1,5 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { LoaderFunctionArgs, Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
+import PostCardsArea from "../components/PostCardsArea/PostCardsArea";
 
 export default function Root() {
     return (
@@ -8,4 +9,8 @@ export default function Root() {
             <Outlet />
         </div>
     )
+}
+
+export async function rootLoader() {
+    return
 }

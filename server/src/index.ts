@@ -1,10 +1,11 @@
 import { Request, Response } from 'express'
 import express from 'express'
 const cors = require('cors')
-import { createUser, getUserByUserName }  from './database'
-import { userAuth } from './INTERFACES'
+import { createUser, getPostById, getUserByUserName }  from './database'
 import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
+import { types } from 'util'
+import { isUser } from './INTERFACES'
 
 dotenv.config()
 
@@ -14,20 +15,29 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
+// GET USER
+app.get('/users/:username', async (req:Request, res:Response) => {
+  const userData = await getUserByUserName(req.params.username)
+  if(!userData) {
+    res.status(404).send("ERROR: user not found")
+  } else {
+    res.status(200).send(userData)
+  }
+})
 
 // CREATE USER
 app.post('/users', async (req:Request, res:Response) => {
-  if (!req.body.hasOwnProperty('username') || !req.body.hasOwnProperty('password')) {
-    res.status(400).send("ERROR: must provide both username and password")
+  if (!isUser(req.body)) {
+    res.status(400).send("ERROR: make sure all required fields are included")
   } else {
-      const result = await createUser(req.body.username, req.body.password)
-      if (result == null) {
-        res.status(500).send("ERROR, could not create user")
-      } else {
-        res.status(200).send("SUCCESS, user created " + result)
-      }
-  }
-  })
+    const result = await createUser(req.body)
+    // if (!isUser(result)) {
+    //   res.status(500).send(`INTERNAL ERROR: ${result}`)
+    // } else {
+      res.status(201).send(result)
+    }
+  // }
+})
 
 // LOGIN
 app.post('/users/login', async (req:Request, res:Response) => {
@@ -54,6 +64,11 @@ app.post('/users/login', async (req:Request, res:Response) => {
           }
       }
   }
+})
+
+// GET POST
+app.get('/posts/:postId', async (req:Request, res:Response) => {
+  const post = await getPostById(+req.params.postId)
 })
 
 app.listen(PORT, () => {

@@ -25,7 +25,7 @@ services:
     volumes:
       - mysqldb-volume:/var/lib/mysql
     ports:
-      - 3306:3306
+      - ${MYSQL_LOCAL_PORT}:${MYSQL_DOCKER_PORT}
 
   db-server:
     restart: unless-stopped
@@ -44,7 +44,20 @@ services:
       - db
     ports:
       - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
-
+  php-myadmin:
+    image: phpmyadmin
+    container_name: php-myadmin
+    restart: unless-stopped
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=${MYSQL_USER}
+      - PMA_PASSWORD=${MYSQL_PASSWORD}
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+    
 
 volumes:
   mysqldb-volume:
